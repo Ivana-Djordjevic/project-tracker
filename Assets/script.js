@@ -66,11 +66,19 @@ function renderTableRow(project){
     
     const tdDueDate = $('<td>');
     tdDueDate.text(project.date);
+
+    const TodayDate = dayjs().format('YYYY-MM-DD')
+
+    if(project.date <= TodayDate ) {
+        trEl.addClass('bg-danger')
+    } else {
+        trEl.addClass('bg-warning')
+    }
     
     const tdButton = $('<td>');
     const doneButton = $('<button>');
     doneButton.text('X');
-    doneButton.click(deleteProject);
+    doneButton.click(deleteProject);  //different way to write jquery event listener
     
     tableHeadEl.append(tableBodyEl);
     tableBodyEl.append(trEl);
@@ -105,7 +113,7 @@ function deleteProject(event){
     row.remove();
 }
 
-function createTable(){
+function hydrateTable(){
     let returnedProjects = getSavedProjects();
     
     if(returnedProjects.length === 0) {
@@ -120,4 +128,4 @@ function createTable(){
 addProjectBtn.on('click', saveProject);
 
 currenDate();
-createTable();
+hydrateTable();
