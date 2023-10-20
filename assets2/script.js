@@ -1,11 +1,3 @@
-// functions to display current time
-function currenDate() {
-    const currentTimeEl = $('#time')
-    const date = dayjs().format('MMM D, YYYY [at] HH:mm:ss a')
-    currentTimeEl.text(date)
-}
-setInterval(currenDate, 1000);
-
 //variables
 const addProjectBtn = $('#add-project-btn');
 
@@ -16,6 +8,13 @@ const dueDateInput = $('#chosen-due-date');
 const tableHeadEl = $('table-head');
 const tableBodyEl = $('#table-body');
 
+// functions to display current time
+function currenDate() {
+    const currentTimeEl = $('#time')
+    const date = dayjs().format('MMM D, YYYY [at] HH:mm:ss a')
+    currentTimeEl.text(date)
+}
+setInterval(currenDate, 1000);
 
 // uppon clicking, this function saves the user input to local storage
 // as well as calls uppon renderTableRow to print user input to screen
@@ -42,7 +41,7 @@ function saveProject(e) {
 function getSavedProjects() {
     let projects = localStorage.getItem('projects');
 
-    if(projects === null){
+    if (projects === null){
         projects = [];
     } else {
         // returns the array of whatever was stringify-ed
@@ -53,7 +52,7 @@ function getSavedProjects() {
 
 // takes in the new projects and sets item to local storage
 function updateProjects(newProjects){
-    localStorage.setItem("projects", JSON.stringify(newProjects));
+    localStorage.setItem('projects', JSON.stringify(newProjects));
 }
 
 function renderTableRow(project){
@@ -114,6 +113,8 @@ function deleteProject(event){
 }
 
 function hydrateTable(){
+    tableBodyEl.empty();
+
     let returnedProjects = getSavedProjects();
     
     if(returnedProjects.length === 0) {
