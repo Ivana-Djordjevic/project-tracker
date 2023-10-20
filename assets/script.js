@@ -1,4 +1,4 @@
-//variables
+ //variables
 const addProjectBtn = $('#add-project-btn');
 
 const projectNameInput = $('#project-name-input');
